@@ -1,0 +1,18 @@
+[build]
+rustflags = [
+    # "--print", "native-static-libs",
+]
+
+[target.'cfg(all(any(target_arch = "x86", target_arch = "x86_64"), target_os = "macos"))']
+rustflags = [
+    "--print", "native-static-libs",
+    "-C", "target-cpu=native",
+    "-C", "target-feature=+aes,+pclmul,+sse,+sse2,+sse3,+ssse3,+sse4.1,+sse4.2,+avx,+avx2,adx",
+]
+
+[target.'cfg(all(any(target_arch = "x86", target_arch = "x86_64"), target_os = "linux"))']
+rustflags = [
+    # "--print", "native-static-libs", 
+    "-C", "target-cpu=native",
+    "-C", "target-feature=+aes,+pclmul,+sse,+sse2,+sse3,+ssse3,+sse4.1,+sse4.2,+avx,+avx2,+fma,+adx",
+]
